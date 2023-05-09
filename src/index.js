@@ -1,19 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "@mui/system";
+
+// INJECTING LIBRARIES
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
+import Store from "./Redux/store";
+
+// INJECTING STYLES
+import "./index.css";
+import "react-notifications/lib/notifications.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <Router>
+    <Router>
+      <Provider store={Store}>
         <App />
-      </Router>
-    </ThemeProvider>
+      </Provider>
+    </Router>
   </React.StrictMode>
 );
 

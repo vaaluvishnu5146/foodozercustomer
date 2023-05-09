@@ -3,17 +3,20 @@ import { Box, Typography } from "@mui/material";
 import RestaurantCard from "../Components/Cards/RestaurantCard";
 import { useNavigate } from "react-router-dom";
 import { getRestaurants } from "../utils/Services";
+import { useSelector, useDispatch } from "react-redux";
+import { saveRestaurantDetails } from "../Redux/Reducer/Restaurants.reducer";
 
 export default function Home() {
   const navigate = useNavigate();
-  const [restaurants, setRestaurants] = useState([]);
+  const dispatcher = useDispatch();
+  const { authentication, restaurant } = useSelector((state) => state);
 
   useEffect(() => {
     getRestaurants()
       .then((result) => {
         const { data, message, success } = result;
         if (success) {
-          setRestaurants(data);
+          dispatcher(saveRestaurantDetails(data));
         }
       })
       .catch((error) => {
@@ -35,12 +38,12 @@ export default function Home() {
           Welcome
         </Typography>
         <Typography variant="h6" component={"p"}>
-          User Name
+          {authentication?.user?.userName || "Eater"}
         </Typography>
       </Box>
       <Box className="list-section">
-        {restaurants &&
-          restaurants.map((d, i) => (
+        {restaurant?.data &&
+          restaurant?.data?.map((d, i) => (
             <RestaurantCard
               data={d}
               key={`restaurants-card-${i}`}

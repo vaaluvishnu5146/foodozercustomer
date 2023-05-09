@@ -29,7 +29,7 @@ export default function RestaurantDetails() {
           {restaurant.restaurantName}
         </Typography>
         <Typography variant="p" component={"p"}>
-          description goes here
+          {restaurant.restaurantDescription}
         </Typography>
       </Box>
       <Box className="list-section">

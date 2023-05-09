@@ -1,18 +1,33 @@
 import Home from "../Pages/Home";
+import Login from "../Pages/Login";
 import RestaurantDetails from "../Pages/RestaurantDetails";
 
 export const path = Object.freeze({
+  auth: {
+    signin: "signin",
+    signup: "signup",
+  },
   home: "home",
   restaurants: {
     restaurantDetails: "restaurantDetails",
   },
 });
 
-const routes = [
+export const authRoutes = [
+  {
+    name: "Login",
+    id: path.auth.signin,
+    path: "/",
+    component: Login,
+    children: [],
+  },
+];
+
+export const routes = [
   {
     name: "Home",
     id: path.home,
-    path: "/",
+    path: "/home",
     component: Home,
     children: [],
   },
@@ -24,5 +39,3 @@ const routes = [
     children: [],
   },
 ];
-
-export default routes;
