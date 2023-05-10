@@ -1,14 +1,26 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import React from "react";
-import AppIcons from "../../Assets/icons";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
-export default function FoodCard({ data = {}, handleClick = (id) => {} }) {
+export default function FoodCard({
+  data = {},
+  handleClick = (data) => {},
+  isItemAdded = false,
+}) {
   return (
     <Card
       className="restaurant-card"
       id="product-card"
       aria-disabled={false}
-      onClick={() => {}}
+      onClick={() => handleClick(data)}
     >
       <Box
         sx={{
@@ -20,7 +32,7 @@ export default function FoodCard({ data = {}, handleClick = (id) => {} }) {
         <Box
           className="brandLogo"
           sx={{
-            background: `url(${data?.foodPicture})`,
+            background: "url(" + data?.foodPicture + ")",
           }}
         ></Box>
         <Box
@@ -44,14 +56,36 @@ export default function FoodCard({ data = {}, handleClick = (id) => {} }) {
             <Typography variant="p" component={"p"} fontWeight={"500"}>
               {data.pricingDetails.normalPrice}
             </Typography>
+            {!isItemAdded && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row-reverse",
+                }}
+              >
+                <Button variant="contained" disableElevation>
+                  Add to cart
+                </Button>
+              </Box>
+            )}
+            {isItemAdded && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row-reverse",
+                  alignItems: "center",
+                }}
+              >
+                <IconButton variant="contained" disableElevation>
+                  <ControlPointIcon />
+                </IconButton>
+                <Typography variant="h5">1</Typography>
+                <IconButton variant="contained" disableElevation>
+                  <RemoveCircleIcon />
+                </IconButton>
+              </Box>
+            )}
           </CardContent>
-          <Box
-            sx={{
-              width: "40px",
-            }}
-          >
-            <AppIcons.ArrowRight />
-          </Box>
         </Box>
       </Box>
     </Card>

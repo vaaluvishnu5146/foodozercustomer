@@ -1,7 +1,7 @@
 :root {
-  --primary: "#C90100";
-  --secondary: "#EE1B24";
-  --teritiary: "#F1BB22";
+  --primary: #c90100;
+  --secondary: #ee1b24;
+  --teritiary: #f1bb22;
   --light: #fefffe;
   --grey: #dae3e5;
 }
@@ -57,4 +57,48 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+/* APP BAR COMPONENT */
+.app-bar {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  > .prefix {
+    width: 80px;
+    height: 100%;
+  }
+  > .content {
+    width: calc(100% - 160px);
+    height: 100%;
+  }
+  > .suffix {
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.cart-page {
+  background: var(--teritiary);
+
+  .cart-content {
+    display: flex;
+    flex-wrap: wrap;
+    > .cart-item {
+      position: relative;
+      width: calc(100% / 2);
+      padding: 10px;
+      box-sizing: border-box;
+
+      > .cart-item-card {
+        padding: 10px;
+      }
+    }
+    > .cart-content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
 }

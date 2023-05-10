@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import { Box, IconButton, Typography } from "@mui/material";
 import RestaurantCard from "../Components/Cards/RestaurantCard";
 import { useNavigate } from "react-router-dom";
 import { getRestaurants } from "../utils/Services";
 import { useSelector, useDispatch } from "react-redux";
 import { saveRestaurantDetails } from "../Redux/Reducer/Restaurants.reducer";
+import Appbar from "../Components/Appbar/Appbar";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -28,11 +30,20 @@ export default function Home() {
   function handleRoute(path = "", scenario = {}) {
     if (path === "restaurantDetails") {
       navigate(`/restaurant/${scenario.id}`);
+    } else if (path === "cart") {
+      navigate(`/cart/dasdasd`);
     }
   }
 
   return (
     <main className="page-container">
+      <Appbar
+        suffix={
+          <IconButton onClick={() => handleRoute("cart")}>
+            <ShoppingCartIcon />
+          </IconButton>
+        }
+      />
       <Box className="welcome-header" id="home-welcome-header">
         <Typography variant="h3" component={"p"}>
           Welcome

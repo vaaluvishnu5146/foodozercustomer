@@ -1,3 +1,4 @@
+import Cart from "../Pages/Cart";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import RestaurantDetails from "../Pages/RestaurantDetails";
@@ -11,6 +12,7 @@ export const path = Object.freeze({
   restaurants: {
     restaurantDetails: "restaurantDetails",
   },
+  cart: "cart",
 });
 
 export const authRoutes = [
@@ -36,6 +38,13 @@ export const routes = [
     id: path.restaurants.restaurantDetails,
     path: "/restaurant/:id",
     component: RestaurantDetails,
+    children: [],
+  },
+  {
+    name: "Cart Details",
+    id: path.cart,
+    path: "/cart/:id",
+    component: Cart,
     children: [],
   },
 ];

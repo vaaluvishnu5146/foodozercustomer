@@ -3,11 +3,22 @@ import React, { useState, useEffect } from "react";
 import { getFoodForRestaurant, getRestaurant } from "../utils/Services";
 import { useParams } from "react-router-dom";
 import FoodCard from "../Components/Cards/FoodCard";
+import { addItemToCart } from "../Redux/Reducer/Cart.reducer";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function RestaurantDetails() {
+  const dispatcher = useDispatch();
+  const { items = [] } = useSelector((state) => state.cart);
   const [food, setFood] = useState([]);
   const [restaurant, setRestaurant] = useState({});
   const getParams = useParams();
+
+  function handleAddToCart(data = null) {
+    if (data) {
+      dispatcher(addItemToCart({ ...data, quantity: 1 }));
+    }
+  }
+
   useEffect(() => {
     getRestaurant(getParams["id"])
       .then((result) => {
@@ -33,7 +44,18 @@ export default function RestaurantDetails() {
         </Typography>
       </Box>
       <Box className="list-section">
-        {food.length > 0 && food.map((food, i) => <FoodCard data={food} />)}
+        {food.length > 0 &&
+          food.map((food, i) => (
+            <FoodCard
+              data={food}
+              handleClick={handleAddToCart}
+              isItemAdded={
+                items.filter((item) => item._id === food._id).length > 0
+                  ? true
+                  : false
+              }
+            />
+          ))}
       </Box>
     </main>
   );
